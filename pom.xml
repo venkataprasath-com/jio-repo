@@ -1,5 +1,3 @@
-
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -13,22 +11,14 @@
     <packaging>war</packaging>
 
     <name>maven-standalone-application</name>
-    <url>https://kkdevops.com</url>
-
-    <organization>
-        <name>KK DEVOPS</name>
-        <url>https://kkdevops.com</url>
-    </organization>
-
     <description>Maven Standalone Application</description>
 
     <properties>
-
-        <!-- Java -->
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
 
         <!-- SonarQube -->
         <sonar.projectKey>maven-standalone-application</sonar.projectKey>
@@ -38,8 +28,6 @@
         <sonar.sources>src/main/java</sonar.sources>
         <sonar.tests>src/test/java</sonar.tests>
         <sonar.java.source>21</sonar.java.source>
-        <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
-
     </properties>
 
     <dependencies>
@@ -51,25 +39,36 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <distributionManagement>
 
         <repository>
             <id>nexus-releases</id>
-            <name>Nexus Releases</name>
-            <url>http://192.168.18.128:8083/repository/maven-releases/</url>
+            <url>
+                http://192.168.18.128:8083/repository/maven-releases/
+            </url>
         </repository>
 
         <snapshotRepository>
             <id>nexus-snapshots</id>
-            <name>Nexus Snapshots</name>
-            <url>http://192.168.18.128:8083/repository/maven-snapshots/</url>
+            <url>
+                http://192.168.18.128:8083/repository/maven-snapshots/
+            </url>
         </snapshotRepository>
 
     </distributionManagement>
 
     <build>
+
+        <finalName>maven-standalone-application</finalName>
 
         <plugins>
 
@@ -97,17 +96,10 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.2</version>
-
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.5.0</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.kk.sample.HelloWorld</mainClass>
-                        </manifest>
-                    </archive>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
 
